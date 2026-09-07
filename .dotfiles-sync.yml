@@ -1,0 +1,26 @@
+# .dotfiles-sync.yml — workbench-ai
+#
+# Ecosystem module (workbench-core ARCHITECTURE.md §2/§3): install/update
+# automation for AI CLIs (Claude Code, GitHub Copilot CLI, Antigravity,
+# Specify/spec-kit) — generic, useful to any user of those tools. Distinct
+# from a personal `ai-config`-style tool by kind of content, not topic:
+# this repo installs the tools; a separate, independent, non-workbench-*
+# tool would hold personal skills/configuration built on top of them (see
+# workbench-core ARCHITECTURE.md §2 for the independent-tracked-tool tier).
+# Meaningless standalone — depends on workbench-core's loader and Core API.
+#
+# No register.shell entries — this module is installers-only, nothing to
+# register as interactive shell content.
+#
+# See contracts/manifest-spec.md (in workbench-core) for the full field
+# reference.
+version: 1
+branch: main
+
+core_api: ">=1.1 <2.0"
+sync:
+  enabled: true
+
+register:
+  installers:
+    - src: shell/installers.sh
