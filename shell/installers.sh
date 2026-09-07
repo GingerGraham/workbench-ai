@@ -121,7 +121,13 @@ install-antigravity() {
                 return 1
             fi
             log_info "Running the upstream Antigravity CLI installer..."
-            if curl -fsSL https://antigravity.google/cli/install.sh | bash; then
+            # Don't trust the pipeline's own exit status: in an interactive
+            # shell (no pipefail), `curl -fsSL … | bash` exits with bash's
+            # status, not curl's — a 404 or network failure leaves curl
+            # non-zero but bash sees empty input and exits 0. Re-check the
+            # binary actually landed, matching install-claude-code's pattern.
+            curl -fsSL https://antigravity.google/cli/install.sh | bash
+            if command -v agy &>/dev/null || [[ -x "${HOME}/.local/bin/agy" ]]; then
                 _agy_post_install
                 return 0
             else

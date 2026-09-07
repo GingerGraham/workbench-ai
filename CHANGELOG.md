@@ -17,6 +17,12 @@ All notable changes to `workbench-ai` are documented here.
   `install-<name>()` function definitions only, so the alias form was
   invisible to `wb tools list`/`wb tools update`. Converted to a real
   one-line wrapper function.
+- `install-antigravity` trusted `curl -fsSL … | bash`'s own exit status. In
+  an interactive shell (no `pipefail`), that's `bash`'s status, not
+  `curl`'s — a 404 or network failure leaves `curl -f` non-zero but `bash`
+  sees empty input and exits 0, so the function could report success on a
+  failed install. Now re-checks that `agy` actually landed, matching
+  `install-claude-code`'s pattern.
 
 ### Changed
 
