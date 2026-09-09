@@ -37,6 +37,10 @@ install-copilot-cli() {
     fi
 }
 
+installed-copilot-cli() {
+    command -v copilot &>/dev/null
+}
+
 # ── Claude Code install ───────────────────────────────────────────────────────
 # Native installer preferred (no Node dependency, self-updating); npm fallback.
 _claude_post_install() {
@@ -83,6 +87,10 @@ install-claude-code() {
     fi
     _npm_global_install "@anthropic-ai/claude-code" || { log_error "Claude Code npm install failed"; return 1; }
     _claude_post_install
+}
+
+installed-claude-code() {
+    command -v claude &>/dev/null
 }
 
 # ── Antigravity CLI install ───────────────────────────────────────────────────
@@ -142,12 +150,24 @@ install-antigravity() {
     esac
 }
 
+# Antigravity CLI's binary is agy.
+installed-antigravity() {
+    command -v agy &>/dev/null
+}
+
 # Google is deprecating Gemini CLI in favour of Antigravity CLI.
 # install-gemini-cli is a real function, not an alias, so `wb tools`
 # discovers it — its introspection (_extract_function_names) matches
 # `install-<name>()` function definitions, never shell aliases.
 install-gemini-cli() {
     install-antigravity
+}
+
+# install-gemini-cli is a thin real-function wrapper around
+# install-antigravity (Google deprecated Gemini CLI in its favour) — same
+# binary, same check.
+installed-gemini-cli() {
+    command -v agy &>/dev/null
 }
 
 # ── Specify CLI (spec-kit) install ────────────────────────────────────────────
@@ -171,4 +191,8 @@ install-specify() {
     else
         log_warn "specify not found on PATH after install. Restart your shell or check uv's tool bin dir (~/.local/bin)."
     fi
+}
+
+installed-specify() {
+    command -v specify &>/dev/null
 }
