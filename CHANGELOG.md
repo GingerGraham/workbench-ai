@@ -4,6 +4,13 @@ All notable changes to `workbench-ai` are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Added `installed-copilot-cli`, `installed-claude-code`,
+  `installed-antigravity`, `installed-gemini-cli`, `installed-specify` —
+  report install status to `wb tools upgrade`/`wb tools list --status`
+  (workbench-core §12 D43).
+
 ## [0.1.0] - 2026-09-09
 
 ### Added
@@ -11,10 +18,6 @@ All notable changes to `workbench-ai` are documented here.
 - Initial decomposition from `workbench-precursor` (Wave C):
   `install-copilot-cli`, `install-claude-code`, `install-antigravity`,
   `install-gemini-cli`, `install-specify`.
-- Added `installed-copilot-cli`, `installed-claude-code`,
-  `installed-antigravity`, `installed-gemini-cli`, `installed-specify` —
-  report install status to `wb tools upgrade`/`wb tools list --status`
-  (workbench-core §12 D43).
 
 ### Fixed
 
