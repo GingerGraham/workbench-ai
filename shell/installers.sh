@@ -38,7 +38,7 @@ install-copilot-cli() {
 }
 
 installed-copilot-cli() {
-    command -v copilot &>/dev/null
+    type -P copilot &>/dev/null
 }
 
 # ── Claude Code install ───────────────────────────────────────────────────────
@@ -90,7 +90,7 @@ install-claude-code() {
 }
 
 installed-claude-code() {
-    command -v claude &>/dev/null
+    type -P claude &>/dev/null
 }
 
 # ── Antigravity CLI install ───────────────────────────────────────────────────
@@ -152,7 +152,7 @@ install-antigravity() {
 
 # Antigravity CLI's binary is agy.
 installed-antigravity() {
-    command -v agy &>/dev/null
+    type -P agy &>/dev/null
 }
 
 # Google is deprecating Gemini CLI in favour of Antigravity CLI.
@@ -167,7 +167,7 @@ install-gemini-cli() {
 # install-antigravity (Google deprecated Gemini CLI in its favour) — same
 # binary, same check.
 installed-gemini-cli() {
-    command -v agy &>/dev/null
+    type -P agy &>/dev/null
 }
 
 # ── Specify CLI (spec-kit) install ────────────────────────────────────────────
@@ -194,5 +194,5 @@ install-specify() {
 }
 
 installed-specify() {
-    command -v specify &>/dev/null
+    type -P specify &>/dev/null
 }

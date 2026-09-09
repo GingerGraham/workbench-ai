@@ -11,7 +11,7 @@ All notable changes to `workbench-ai` are documented here.
   `install-gemini-cli`, `install-specify`.
 - Added `installed-copilot-cli`, `installed-claude-code`,
   `installed-antigravity`, `installed-gemini-cli`, `installed-specify` —
-  reports install status to `wb tools upgrade`/`list --status`
+  report install status to `wb tools upgrade`/`wb tools list --status`
   (workbench-core §12 D43).
 
 ### Fixed
