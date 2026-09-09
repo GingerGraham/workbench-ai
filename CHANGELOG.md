@@ -4,6 +4,8 @@ All notable changes to `workbench-ai` are documented here.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-09
+
 ### Added
 
 - Added `installed-copilot-cli`, `installed-claude-code`,
