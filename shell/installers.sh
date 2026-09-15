@@ -65,10 +65,8 @@ install-claude-code() {
                 log_info "Using the native installer (no Node.js required, self-updating)..."
                 local tmp_script
                 if ! tmp_script="$(mktemp)"; then
-                    log_error "Claude Code: mktemp failed — cannot create a temp file for the install script"
-                    return 1
-                fi
-                if _download_file_robust "https://claude.ai/install.sh" "${tmp_script}" \
+                    log_warn "Claude Code: mktemp failed — skipping the native installer, falling back to npm..."
+                elif _download_file_robust "https://claude.ai/install.sh" "${tmp_script}" \
                     && [[ -s "${tmp_script}" ]] \
                     && bash "${tmp_script}"; then
                     rm -f "${tmp_script}"
