@@ -63,7 +63,11 @@ install-claude-code() {
         Linux|Mac)
             if command -v curl &>/dev/null; then
                 log_info "Using the native installer (no Node.js required, self-updating)..."
-                local tmp_script; tmp_script="$(mktemp)"
+                local tmp_script
+                if ! tmp_script="$(mktemp)"; then
+                    log_error "Claude Code: mktemp failed — cannot create a temp file for the install script"
+                    return 1
+                fi
                 if _download_file_robust "https://claude.ai/install.sh" "${tmp_script}" \
                     && [[ -s "${tmp_script}" ]] \
                     && bash "${tmp_script}"; then
@@ -134,7 +138,11 @@ install-antigravity() {
                 return 1
             fi
             log_info "Running the upstream Antigravity CLI installer..."
-            local tmp_script; tmp_script="$(mktemp)"
+            local tmp_script
+            if ! tmp_script="$(mktemp)"; then
+                log_error "Antigravity CLI: mktemp failed — cannot create a temp file for the install script"
+                return 1
+            fi
             if _download_file_robust "https://antigravity.google/cli/install.sh" "${tmp_script}" \
                 && [[ -s "${tmp_script}" ]] \
                 && bash "${tmp_script}"; then
