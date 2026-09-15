@@ -18,6 +18,16 @@ All notable changes to `workbench-ai` are documented here.
   piloted on `workbench-git` first. See `workbench-core`'s
   `docs/decisions-log.md` D60.
 
+### Fixed
+
+- **`install-claude-code` and `install-antigravity` no longer pipe their
+  vendor install scripts straight into `bash`** — each now downloads to a
+  temp file via `_download_file_robust`, verifies the download landed and
+  is non-empty, then executes the file. Closes a `scan-patterns` CI
+  finding (remote-script-execution pattern); the download-then-execute
+  shape also replaces `install-antigravity`'s prior reliance on
+  re-checking whether `agy` landed after an untrusted pipe.
+
 ## [0.2.0] - 2026-09-09
 
 ### Added
