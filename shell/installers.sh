@@ -63,13 +63,18 @@ install-claude-code() {
         Linux|Mac)
             if command -v curl &>/dev/null; then
                 log_info "Using the native installer (no Node.js required, self-updating)..."
-                if curl -fsSL https://claude.ai/install.sh | bash; then
+                local tmp_script; tmp_script="$(mktemp)"
+                if _download_file_robust "https://claude.ai/install.sh" "${tmp_script}" \
+                    && [[ -s "${tmp_script}" ]] \
+                    && bash "${tmp_script}"; then
+                    rm -f "${tmp_script}"
                     if command -v claude &>/dev/null || [[ -x "${HOME}/.local/bin/claude" ]]; then
                         _claude_post_install
                         return 0
                     fi
                     log_warn "Native installer ran but 'claude' is not on PATH yet — trying npm..."
                 else
+                    rm -f "${tmp_script}"
                     log_warn "Native installer failed — falling back to npm..."
                 fi
             fi
@@ -129,17 +134,21 @@ install-antigravity() {
                 return 1
             fi
             log_info "Running the upstream Antigravity CLI installer..."
-            # Don't trust the pipeline's own exit status: in an interactive
-            # shell (no pipefail), `curl -fsSL … | bash` exits with bash's
-            # status, not curl's — a 404 or network failure leaves curl
-            # non-zero but bash sees empty input and exits 0. Re-check the
-            # binary actually landed, matching install-claude-code's pattern.
-            curl -fsSL https://antigravity.google/cli/install.sh | bash
-            if command -v agy &>/dev/null || [[ -x "${HOME}/.local/bin/agy" ]]; then
-                _agy_post_install
-                return 0
+            local tmp_script; tmp_script="$(mktemp)"
+            if _download_file_robust "https://antigravity.google/cli/install.sh" "${tmp_script}" \
+                && [[ -s "${tmp_script}" ]] \
+                && bash "${tmp_script}"; then
+                rm -f "${tmp_script}"
+                if command -v agy &>/dev/null || [[ -x "${HOME}/.local/bin/agy" ]]; then
+                    _agy_post_install
+                    return 0
+                else
+                    log_error "Antigravity CLI installer script failed."
+                    return 1
+                fi
             else
-                log_error "Antigravity CLI installer script failed."
+                rm -f "${tmp_script}"
+                log_error "Antigravity CLI: install script download failed or execution failed."
                 return 1
             fi
             ;;
