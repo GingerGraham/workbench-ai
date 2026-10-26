@@ -45,6 +45,13 @@ for key in version core_api register; do
     fi
 done
 
+# The final pre-launch pass puts every module at Core API 1.8 or later.
+if [[ -n "${MANIFEST}" ]] && grep -q '^core_api: ">=1.8 <2.0"$' "${MANIFEST}"; then
+    ok "core_api requires 1.8"
+else
+    fail "core_api must be \">=1.8 <2.0\""
+fi
+
 if [[ -n "${MANIFEST}" ]]; then
     while IFS= read -r src; do
         [[ -z "${src}" ]] && continue

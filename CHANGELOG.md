@@ -16,6 +16,12 @@ All notable changes to `workbench-ai` are documented here.
   here runs a vendor install script or an npm/uv latest version, with no
   checksum or signature check (accepted, 2026-10 decision).
 
+### Changed
+
+- **`core_api` requirement raised to `>=1.8 <2.0`**, the floor every
+  workbench module now declares (workbench-core Core API 1.8). Hosts on an
+  older workbench-core hold this release until `wb update core`.
+
 ### Fixed
 
 - **README no longer points at `wb tools update`**, which `workbench-core`
