@@ -16,11 +16,11 @@
 # npm package @github/copilot — requires Node.js 22+.
 install-copilot-cli() {
     log_info "Installing or updating GitHub Copilot CLI (@github/copilot)..."
-    _ensure_npm || { log_error "npm is required for the Copilot CLI. Install Node first with: install-nvm (workbench-devtools)"; return 1; }
+    _ensure_npm || { log_error "npm is required for the Copilot CLI. Install Node first with: wb tools install nvm (workbench-devtools)"; return 1; }
 
     if ! _node_version_at_least 22; then
         log_warn "Copilot CLI requires Node.js 22+. Detected: $(node --version 2>/dev/null || echo none)."
-        log_warn "Get a current Node with: install-nvm (workbench-devtools), then re-run install-copilot-cli"
+        log_warn "Get a current Node with: wb tools install nvm (workbench-devtools), then re-run: wb tools install copilot-cli"
         return 1
     fi
 
@@ -86,10 +86,10 @@ install-claude-code() {
             ;;
     esac
 
-    _ensure_npm || { log_error "Native install failed and npm is unavailable. Install Node with: install-nvm (workbench-devtools)"; return 1; }
+    _ensure_npm || { log_error "Native install failed and npm is unavailable. Install Node with: wb tools install nvm (workbench-devtools)"; return 1; }
     if ! _node_version_at_least 18; then
         log_warn "Claude Code (npm) requires Node.js 18+. Detected: $(node --version 2>/dev/null || echo none)."
-        log_warn "Get a current Node with: install-nvm (workbench-devtools), then re-run install-claude-code"
+        log_warn "Get a current Node with: wb tools install nvm (workbench-devtools), then re-run: wb tools install claude-code"
         return 1
     fi
     _npm_global_install "@anthropic-ai/claude-code" || { log_error "Claude Code npm install failed"; return 1; }
@@ -190,7 +190,7 @@ installed-gemini-cli() {
 # package-manager or binary release), installed straight from the spec-kit
 # git repo — identical on every distro and macOS, so no branching is needed.
 install-specify() {
-    command -v uv &>/dev/null || { log_error "uv is required for Specify CLI. Install it first with: install-uv (workbench-devtools)"; return 1; }
+    command -v uv &>/dev/null || { log_error "uv is required for Specify CLI. Install it first with: wb tools install uv (workbench-devtools)"; return 1; }
 
     log_info "Installing or updating Specify CLI (specify-cli)..."
     uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git \

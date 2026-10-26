@@ -12,12 +12,19 @@ All notable changes to `workbench-ai` are documented here.
   what Conventional Commits since the last tag would compute — a floor,
   never a downgrade of a higher severity already pending. Manual dispatch
   only runs from `main`. See `workbench-core`'s `docs/decisions-log.md` D67.
+- **README: "What these installers verify".** States that every installer
+  here runs a vendor install script or an npm/uv latest version, with no
+  checksum or signature check (accepted, 2026-10 decision).
 
 ### Fixed
 
 - **README no longer points at `wb tools update`**, which `workbench-core`
   removed (D43). It now says `wb tools install <name>` to install a tool and
   `wb tools upgrade <name>` to update one already installed.
+- **Installer messages name `wb tools install`, not `install-*`.** The
+  hints to get Node or uv now say `wb tools install nvm` / `wb tools install
+  uv` (both from `workbench-devtools`), and the "re-run" hints say
+  `wb tools install copilot-cli` / `wb tools install claude-code`.
 
 ## [0.2.1] - 2026-09-15
 
