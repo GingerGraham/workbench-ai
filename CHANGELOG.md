@@ -13,6 +13,12 @@ All notable changes to `workbench-ai` are documented here.
   never a downgrade of a higher severity already pending. Manual dispatch
   only runs from `main`. See `workbench-core`'s `docs/decisions-log.md` D67.
 
+### Fixed
+
+- **README no longer points at `wb tools update`**, which `workbench-core`
+  removed (D43). It now says `wb tools install <name>` to install a tool and
+  `wb tools upgrade <name>` to update one already installed.
+
 ## [0.2.1] - 2026-09-15
 
 ### Added

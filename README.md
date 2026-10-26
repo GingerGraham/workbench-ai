@@ -14,8 +14,9 @@ wb add ai
 
 `install-copilot-cli`, `install-claude-code`, `install-antigravity`
 (aliased — as a real function, not a shell `alias`, so `wb tools` can
-discover it — as `install-gemini-cli`), and `install-specify`, all via
-`wb tools update`.
+discover it — as `install-gemini-cli`), and `install-specify`. Install one
+with `wb tools install <name>` (e.g. `wb tools install claude-code`) and
+update an installed one with `wb tools upgrade <name>`.
 
 Installers only — no shell aliases or interactive functions. This repo is
 distinct from a personal, separately-tracked AI-config tool (skills/prompts

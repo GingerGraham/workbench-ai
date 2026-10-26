@@ -58,7 +58,7 @@ fi
 
 # install-gemini-cli must be a real function, discoverable by wb tools'
 # _extract_function_names -- an `alias install-gemini-cli=...` form would
-# be invisible to `wb tools list`/`wb tools update`.
+# be invisible to `wb tools list`/`wb tools install`.
 if grep -qE '^[[:space:]]*install-gemini-cli[[:space:]]*\(\)' "${REPO_ROOT}/shell/installers.sh"; then
     ok "install-gemini-cli is a real function, not an alias"
 else
