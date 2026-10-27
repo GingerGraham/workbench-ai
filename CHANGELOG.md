@@ -4,6 +4,8 @@ All notable changes to `workbench-ai` are documented here.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-27
+
 ### Added
 
 - **Manual `workflow_dispatch` release override.** `release.yml` now
