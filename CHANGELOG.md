@@ -4,6 +4,8 @@ All notable changes to `workbench-ai` are documented here.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-21
+
 ### Fixed
 
 - **Installing the Copilot CLI no longer `sudo`-installs an older Node.js
