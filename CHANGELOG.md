@@ -4,6 +4,19 @@ All notable changes to `workbench-ai` are documented here.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Installing the Copilot CLI no longer `sudo`-installs an older Node.js
+  first.** `install-copilot-cli` needs Node.js 22+. With no npm and no
+  `nvm`, the shared npm helper installed the distro's `nodejs` with `sudo`
+  whatever its version, and the Node.js 22 check then failed with the old
+  Node.js already on the machine. The installer now tells the helper the
+  minimum it needs, so nothing is installed unless the distro's Node.js
+  is new enough. Otherwise it stops and points to
+  `wb tools install nvm`. The npm fallback of `install-claude-code` does
+  the same with a minimum of Node.js 18. Needs a `workbench-core` with
+  Core API 1.9; `core_api` is now `>=1.9 <2.0`.
+
 ### Changed
 
 - **Bug report template asks for OS family and environment separately.**
