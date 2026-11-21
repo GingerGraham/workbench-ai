@@ -10,13 +10,16 @@
 # (contracts/core-api.md), replacing the precursor's DOTFILES_OS.
 # _ensure_npm/_npm_global_install/_node_version_at_least come from
 # workbench-core's Core API (lib/core/installers-common.sh) — not
-# duplicated here.
+# duplicated here. _ensure_npm's minimum-Node-version argument needs
+# Core API 1.9 (see core_api in workbench.yml).
 
 # ── GitHub Copilot CLI install ────────────────────────────────────────────────
 # npm package @github/copilot — requires Node.js 22+.
 install-copilot-cli() {
     log_info "Installing or updating GitHub Copilot CLI (@github/copilot)..."
-    _ensure_npm || { log_error "npm is required for the Copilot CLI. Install Node first with: wb tools install nvm (workbench-devtools)"; return 1; }
+    # 22 is passed so _ensure_npm won't sudo-install an older distro Node.js
+    # just for the version check below to fail.
+    _ensure_npm 22 || { log_error "Copilot CLI needs npm with Node.js 22+, and none could be set up. Install Node first with: wb tools install nvm (workbench-devtools), then re-run: wb tools install copilot-cli"; return 1; }
 
     if ! _node_version_at_least 22; then
         log_warn "Copilot CLI requires Node.js 22+. Detected: $(node --version 2>/dev/null || echo none)."
@@ -86,7 +89,9 @@ install-claude-code() {
             ;;
     esac
 
-    _ensure_npm || { log_error "Native install failed and npm is unavailable. Install Node with: wb tools install nvm (workbench-devtools)"; return 1; }
+    # 18 is passed so _ensure_npm won't sudo-install an older distro Node.js
+    # just for the version check below to fail.
+    _ensure_npm 18 || { log_error "Native install failed and npm with Node.js 18+ could not be set up. Install Node with: wb tools install nvm (workbench-devtools), then re-run: wb tools install claude-code"; return 1; }
     if ! _node_version_at_least 18; then
         log_warn "Claude Code (npm) requires Node.js 18+. Detected: $(node --version 2>/dev/null || echo none)."
         log_warn "Get a current Node with: wb tools install nvm (workbench-devtools), then re-run: wb tools install claude-code"

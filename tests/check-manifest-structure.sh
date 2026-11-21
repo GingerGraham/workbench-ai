@@ -45,11 +45,12 @@ for key in version core_api register; do
     fi
 done
 
-# The final pre-launch pass puts every module at Core API 1.8 or later.
-if [[ -n "${MANIFEST}" ]] && grep -q '^core_api: ">=1.8 <2.0"$' "${MANIFEST}"; then
-    ok "core_api requires 1.8"
+# 1.9 is where _ensure_npm gained its minimum-Node-version argument, which
+# shell/installers.sh passes (see the check below).
+if [[ -n "${MANIFEST}" ]] && grep -q '^core_api: ">=1.9 <2.0"$' "${MANIFEST}"; then
+    ok "core_api requires 1.9"
 else
-    fail "core_api must be \">=1.8 <2.0\""
+    fail "core_api must be \">=1.9 <2.0\""
 fi
 
 if [[ -n "${MANIFEST}" ]]; then
